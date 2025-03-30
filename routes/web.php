@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/about',function(){
     return view('about');
 });
+
+Route::get('/product/{id}', function(string $id){
+return "Product ID=$id";
+});

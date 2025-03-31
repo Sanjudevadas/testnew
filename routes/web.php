@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,3 +25,4 @@ Route::get('/sum/{a}/{b}',function(float $a, float $b){
 
 })->whereNumber(['a','b']);
 
+Route::get('/car',[CarController::class,'index']);

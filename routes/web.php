@@ -1,28 +1,37 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\Challenge;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index');
 });
+
+
+
 
 Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/product/{id}', function (string $id) {
-    return "Product ID = $id";
+
+
+Route::controller(CarController::class)->group(function(){
+    Route::get('/car','index');
+    Route::get('/my-car','myCars');
+
+
 });
 
-Route::get('/service/{id}/{id2}', function (int $id, int $id2) {
-    return "Sum = " . ($id + $id2);
+Route::resource('/products', ProductController::class);
+
+Route::controller(Challenge::class)->group(function () {
+    Route::get('/sum/{a}/{b}', 'sum')->whereNumber(['a','b']);
+    Route::get('/substract/{a}/{b}', 'substract')->whereNumber(['a','b']);
+
 });
-
-Route::get('/sum/{a}/{b}',function(float $a, float $b){
-
-    return $a+ $b;
-
-})->whereNumber(['a','b']);
-
-Route::get('/car',[CarController::class,'index']);

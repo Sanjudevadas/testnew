@@ -10,6 +10,9 @@ class HomeController extends Controller
         return view('home.index',[
             'name' => 'Sanju',
             'surname' => 'Devedas'
+            ,
+            'cars'=> 2,
+            'hobbies'=>['playing','coding','movies']
         ]);
     }
   
